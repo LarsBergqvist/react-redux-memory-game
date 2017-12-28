@@ -51,7 +51,7 @@ function getCard(id,cards) {
   };
 }
 
-function hasCardsIdenticalImages(id1, id2, cards) {
+function cardsHaveIdenticalImages(id1, id2, cards) {
   if (getCard(id1, cards).image === getCard(id2, cards).image) {
     return true;
   } else {
@@ -105,7 +105,7 @@ function memoryGame(state = initialState, action) {
     case INIT_GAME:
       return Object.assign({}, initialState, { cards: memoryCards(initialState.cards, shuffleCards()) } );
     case CHECK_MATCHED_PAIR:
-      if (state.numClicksWithinTurn === 2 && hasCardsIdenticalImages(state.firstId, state.secondId, state.cards)) {
+      if (state.numClicksWithinTurn === 2 && cardsHaveIdenticalImages(state.firstId, state.secondId, state.cards)) {
         // PAIR MATCHED
         let pairsFound = state.pairsFound + 1;
         let gameComplete = false;
