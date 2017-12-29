@@ -11,6 +11,6 @@
 <p>Click the cards to flip to images<p>
 
 ![Alt text](screenshot.png?raw=true "A simple memory game in React")
-<p>The infrastructure of this project was created with create-react-app
+<p>The infrastructure for this project was created with create-react-app
 <p>The photos in the thumbnail cards (C) Lars Bergqvist
 
