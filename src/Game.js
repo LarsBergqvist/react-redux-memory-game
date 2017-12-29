@@ -6,7 +6,7 @@ import { flipUpCard, checkMatchedPair, initGame } from './actions';
 
 class Game extends Component {
   componentWillMount() {
-    setInterval(this.props.onCheckForMatchedPair,2000);
+    setInterval(this.props.onCheckForMatchedPair,5000);
   }
 
   getCardViews() {
@@ -67,7 +67,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onCardClicked: id => {
-      dispatch(flipUpCard(id))
+      dispatch(flipUpCard(id));
     },
     onCheckForMatchedPair: () => {
       dispatch(checkMatchedPair());

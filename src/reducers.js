@@ -1,5 +1,6 @@
 import { FLIP_UP_CARD, SHUFFLE_CARDS, CHECK_MATCHED_PAIR, markPairAsMatched, 
-        MARK_PAIR_AS_MATCHED, flipDownPair, FLIP_DOWN_PAIR, INIT_GAME, shuffleCards } from "./actions";
+        MARK_PAIR_AS_MATCHED, flipDownPair, FLIP_DOWN_PAIR, INIT_GAME, 
+        shuffleCards, checkMatchedPair, flipUpCard } from "./actions";
 import shuffle from 'shuffle-array';
 
 const NUM_IMAGES = 10;
@@ -18,7 +19,6 @@ function generateCardSet() {
   //
   // Generate a set of cards with image pairs
   //
-
   let cards = [];
   let id=1;
   for(let i=1; i <= NUM_IMAGES; i++) {
@@ -67,10 +67,10 @@ function memoryCards(state = [], action) {
         if (action.id === card.id) {
           return Object.assign({}, card, {
             imageUp: true
-          })
+          });
         }
-        return card
-      })
+        return card;
+      });
     case MARK_PAIR_AS_MATCHED:
       return state.map((card) => {
         if (action.id1 === card.id || action.id2 === card.id) {
@@ -78,8 +78,8 @@ function memoryCards(state = [], action) {
             matched: true
           })
         }
-        return card
-      })  
+        return card;
+      });
     case FLIP_DOWN_PAIR:
       return state.map((card) => {
         if (action.id1 === card.id || action.id2 === card.id) {
@@ -87,14 +87,14 @@ function memoryCards(state = [], action) {
             imageUp: false
           })
         }
-        return card
-      })    
+        return card;
+      });
     case SHUFFLE_CARDS:
       let newCards = [...state];
       newCards = shuffle(newCards);
       return newCards;
     default:
-      return state
+      return state;
   }
 }
 
@@ -129,7 +129,10 @@ function memoryGame(state = initialState, action) {
     case FLIP_UP_CARD:
       if (state.numClicksWithinTurn === 2)
       {
-        return state;
+        // Two cards already flipped
+        // Check for match and trigger a new flip
+        let s = memoryGame(state, checkMatchedPair());
+        return memoryGame(s, flipUpCard(action.id));
       }
 
       let card = getCard(action.id, state.cards);
@@ -154,7 +157,7 @@ function memoryGame(state = initialState, action) {
     case SHUFFLE_CARDS:
       return Object.assign({}, state, { cards: memoryCards(state.cards, action) } );
     default:
-      return state
+      return state;
   }
 }
 
