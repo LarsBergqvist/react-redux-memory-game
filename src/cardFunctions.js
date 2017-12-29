@@ -28,7 +28,7 @@ export function generateCardSet() {
   return cards;
 };
 
-export function getCard(id,cards) {
+export function getCard(id, cards) {
   for(let i=0; i < 2*NUM_IMAGES; i++) {
     if (cards[i].id === id) {
       return cards[i];

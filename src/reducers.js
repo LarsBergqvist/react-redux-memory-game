@@ -2,7 +2,7 @@ import { FLIP_UP_CARD, SHUFFLE_CARDS, CHECK_MATCHED_PAIR, markPairAsMatched,
         MARK_PAIR_AS_MATCHED, flipDownPair, FLIP_DOWN_PAIR, INIT_GAME, 
         shuffleCards, checkMatchedPair, flipUpCard } from "./actions";
 import shuffle from 'shuffle-array';
-import { NUM_IMAGES, generateCardSet, getCard, cardsHaveIdenticalImages } from './cardSet';
+import { NUM_IMAGES, generateCardSet, getCard, cardsHaveIdenticalImages } from './cardFunctions';
 
 const initialState = {
   turnNo : 1,

@@ -1,6 +1,13 @@
 import { createStore } from 'redux'
 import memoryGame from './reducers'
 import { flipUpCard, checkMatchedPair } from './actions';
+import { getCard } from './cardFunctions';
+
+//
+// These tests uses the initial, un-shuffled state
+// of the card set. Thus, pairs can be found 
+// as cards with id N and N+1 (where N is an odd number)
+//
 
 test('Check number of cards in the game', () => {
   let store = createStore(memoryGame);
@@ -10,9 +17,9 @@ test('Check number of cards in the game', () => {
 
 test('Test that flipUpCard turns image up', () => {
   let store = createStore(memoryGame);
-  expect(store.getState().cards[0].imageUp).toBe(false);
+  expect( getCard( 1, store.getState().cards ).imageUp).toBe(false);
   store.dispatch(flipUpCard(1));
-  expect(store.getState().cards[0].imageUp).toBe(true);
+  expect( getCard( 1, store.getState().cards ).imageUp).toBe(true);
 });
 
 test('Test that 3rd card flip checks for matches on previous cards and that the 3rd flip is valid', () => {
@@ -21,10 +28,10 @@ test('Test that 3rd card flip checks for matches on previous cards and that the 
   store.dispatch(flipUpCard(2));
   store.dispatch(flipUpCard(3));
   // the 3rd flip should trigger match check on previous cards
-  expect(store.getState().cards[0].matched).toBe(true);
-  expect(store.getState().cards[1].matched).toBe(true);
+  expect( getCard( 1, store.getState().cards ).matched).toBe(true);
+  expect( getCard( 2, store.getState().cards ).matched).toBe(true);
   // and flipping the 3rd card was valid
-  expect(store.getState().cards[2].imageUp).toBe(true);
+  expect( getCard( 1, store.getState().cards ).imageUp).toBe(true);
 });
 
 test('Test that pair is found after flipping two cards with same image', () => {
@@ -39,9 +46,9 @@ test('Test that pair is found after flipping two cards with same image', () => {
   store.dispatch(flipUpCard(2));
   store.dispatch(checkMatchedPair());
   expect(store.getState().pairsFound).toBe(1);
-  expect(store.getState().cards[0].matched).toBe(true);
-  expect(store.getState().cards[1].matched).toBe(true);
-  expect(store.getState().cards[0].image).toBe(store.getState().cards[1].image);
+  expect( getCard( 1, store.getState().cards ).matched).toBe(true);
+  expect( getCard( 2, store.getState().cards ).matched).toBe(true);
+  expect( getCard( 1, store.getState().cards ).image).toBe( getCard( 1, store.getState().cards ).image);
 });
 
 test('Test that pair is not found after flipping two cards with different images', () => {
@@ -51,7 +58,7 @@ test('Test that pair is not found after flipping two cards with different images
   store.dispatch(flipUpCard(3));
   store.dispatch(checkMatchedPair());
   expect(store.getState().pairsFound).toBe(0);
-  expect(store.getState().cards[0].image).not.toBe(store.getState().cards[2].image);
+  expect( getCard( 1, store.getState().cards ).image).not.toBe( getCard( 3, store.getState().cards ).image);
 });
 
 test('Test that is game completed after all pairs are found', () => {
@@ -64,7 +71,7 @@ test('Test that is game completed after all pairs are found', () => {
     store.dispatch(flipUpCard(id));
     store.dispatch(flipUpCard(id+1));
     store.dispatch(checkMatchedPair());
-    expect(store.getState().gameComplete).toBe(false);  
+    expect( store.getState().gameComplete).toBe(false);  
   }
 
   // Flip the last pair of cards
