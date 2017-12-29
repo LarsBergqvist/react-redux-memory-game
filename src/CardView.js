@@ -9,7 +9,7 @@ class CardView extends Component {
 
   onClick() {
     if (!this.props.matched && !this.props.imageUp) {
-      this.props.onClick(this.props.id,this.props.image);      
+      this.props.onClick(this.props.id);      
     }
   }
 

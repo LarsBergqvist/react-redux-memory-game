@@ -2,8 +2,7 @@ import { FLIP_UP_CARD, SHUFFLE_CARDS, CHECK_MATCHED_PAIR, markPairAsMatched,
         MARK_PAIR_AS_MATCHED, flipDownPair, FLIP_DOWN_PAIR, INIT_GAME, 
         shuffleCards, checkMatchedPair, flipUpCard } from "./actions";
 import shuffle from 'shuffle-array';
-
-const NUM_IMAGES = 10;
+import { NUM_IMAGES, generateCardSet, getCard, cardsHaveIdenticalImages } from './cardSet';
 
 const initialState = {
   turnNo : 1,
@@ -15,50 +14,7 @@ const initialState = {
   cards: generateCardSet()
 };
 
-function generateCardSet() {
-  //
-  // Generate a set of cards with image pairs
-  //
-  let cards = [];
-  let id=1;
-  for(let i=1; i <= NUM_IMAGES; i++) {
-    let card1 = {
-      id: id,
-      image : i,
-      imageUp: false,
-      matched: false
-    };
-    id++;
-    let card2 = {
-      id: id,
-      image : i,
-      imageUp: false,
-      matched: false
-    };
-    cards.push(card1);
-    cards.push(card2);
-    id++;
-  }
-
-  return cards;
-};
-
-function getCard(id,cards) {
-  for(let i=0; i < 2*NUM_IMAGES; i++) {
-    if (cards[i].id === id) {
-      return cards[i];
-    }
-  };
-}
-
-function cardsHaveIdenticalImages(id1, id2, cards) {
-  if (getCard(id1, cards).image === getCard(id2, cards).image) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
+// The reducer for the memory card array
 // state is an array of cards
 function memoryCards(state = [], action) {
   switch (action.type) {
@@ -71,6 +27,7 @@ function memoryCards(state = [], action) {
         }
         return card;
       });
+    
     case MARK_PAIR_AS_MATCHED:
       return state.map((card) => {
         if (action.id1 === card.id || action.id2 === card.id) {
@@ -80,6 +37,7 @@ function memoryCards(state = [], action) {
         }
         return card;
       });
+    
     case FLIP_DOWN_PAIR:
       return state.map((card) => {
         if (action.id1 === card.id || action.id2 === card.id) {
@@ -89,21 +47,24 @@ function memoryCards(state = [], action) {
         }
         return card;
       });
+    
     case SHUFFLE_CARDS:
       let newCards = [...state];
       newCards = shuffle(newCards);
       return newCards;
+    
     default:
       return state;
   }
 }
 
-
+// The reducer for the game
 // state is an object with game state and an array of cards
 function memoryGame(state = initialState, action) {
   switch (action.type) {
     case INIT_GAME:
       return Object.assign({}, initialState, { cards: memoryCards(initialState.cards, shuffleCards()) } );
+    
     case CHECK_MATCHED_PAIR:
       if (state.numClicksWithinTurn === 2 && cardsHaveIdenticalImages(state.firstId, state.secondId, state.cards)) {
         // PAIR MATCHED
@@ -126,10 +87,11 @@ function memoryGame(state = initialState, action) {
           cards: memoryCards(state.cards, flipDownPair(state.firstId, state.secondId)) } );              
       }
       return state;
+    
     case FLIP_UP_CARD:
       if (state.numClicksWithinTurn === 2)
       {
-        // Two cards already flipped
+        // Two cards are already flipped
         // Check for match and trigger a new flip
         let s = memoryGame(state, checkMatchedPair());
         return memoryGame(s, flipUpCard(action.id));
@@ -154,8 +116,10 @@ function memoryGame(state = initialState, action) {
         secondId: secondId, 
         numClicksWithinTurn : numClicks,
         cards: memoryCards(state.cards, action) } );    
+    
     case SHUFFLE_CARDS:
       return Object.assign({}, state, { cards: memoryCards(state.cards, action) } );
+    
     default:
       return state;
   }

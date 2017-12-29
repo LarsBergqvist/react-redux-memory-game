@@ -13,13 +13,13 @@ class Game extends Component {
     let cardViews = [];
     let onClick = this.props.onCardClicked;
     this.props.cards.forEach(c => {
-      let cardView = <CardView key={c.id} 
-          id={c.id} 
-          image={c.image}
-          imageUp = {c.imageUp}
-          matched = {c.matched} 
-          onClick={onClick}/>;
-          cardViews.push(cardView);
+      let cardView = <CardView  key={c.id} 
+                                id={c.id} 
+                                image={c.image}
+                                imageUp = {c.imageUp}
+                                matched = {c.matched} 
+                                onClick={onClick}/>
+                                cardViews.push(cardView);
     });
     return cardViews;
   }
