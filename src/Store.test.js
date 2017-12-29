@@ -15,14 +15,15 @@ test('Test that flipUpCard turns image up', () => {
   expect(store.getState().cards[0].imageUp).toBe(true);
 });
 
-test('Test that 3rd card flip can not be done until match is checked', () => {
+test('Test that 3rd card flip checks for matches on previous cards and that the 3rd flip is valid', () => {
   let store = createStore(memoryGame);
   store.dispatch(flipUpCard(1));
   store.dispatch(flipUpCard(2));
   store.dispatch(flipUpCard(3));
-  expect(store.getState().cards[2].imageUp).toBe(false);
-  store.dispatch(checkMatchedPair());
-  store.dispatch(flipUpCard(3));
+  // the 3rd flip should trigger match check on previous cards
+  expect(store.getState().cards[0].matched).toBe(true);
+  expect(store.getState().cards[1].matched).toBe(true);
+  // and flipping the 3rd card was valid
   expect(store.getState().cards[2].imageUp).toBe(true);
 });
 
