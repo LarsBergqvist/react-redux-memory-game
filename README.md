@@ -2,7 +2,7 @@
 
 ```javascript
     git clone https://github.com/LarsBergqvist/react-redux-memory-game
-    cd react-memory-simple
+    cd react-redux-memory-game
     yarn install
     yarn start
 ```
