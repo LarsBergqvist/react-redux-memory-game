@@ -61,7 +61,7 @@ test('Test that pair is not found after flipping two cards with different images
   expect( getCard( 1, store.getState().cards ).image).not.toBe( getCard( 3, store.getState().cards ).image);
 });
 
-test('Test that is game completed after all pairs are found', () => {
+test('Test that the game is completed after all pairs are found', () => {
   let store = createStore(memoryGame);
   expect(store.getState().gameComplete).toBe(false);
 
