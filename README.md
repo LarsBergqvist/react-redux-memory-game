@@ -1,5 +1,8 @@
 # react-redux-memory-game
 
+Try it out live here: https://build-jimhhpgcqp.now.sh/
+<p>
+Or clone the code and build it yourself:
 ```javascript
     git clone https://github.com/LarsBergqvist/react-redux-memory-game
     cd react-redux-memory-game
