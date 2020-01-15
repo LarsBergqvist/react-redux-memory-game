@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import GameView from './Game';
 
-class App extends Component {
-
-  render() {
+function App() {
     return (
-      <GameView/>
+        <GameView />
     );
-  }
 }
 
 export default App;
