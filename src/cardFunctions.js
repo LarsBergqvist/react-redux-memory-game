@@ -4,17 +4,17 @@ export function generateCardSet() {
     //
     // Generate a set of cards with image pairs
     //
-    let cards = [];
+    const cards = [];
     let id = 1;
     for (let i = 1; i <= NUM_IMAGES; i++) {
-        let card1 = {
+        const card1 = {
             id: id,
             image: i,
             imageUp: false,
             matched: false
         };
         id++;
-        let card2 = {
+        const card2 = {
             id: id,
             image: i,
             imageUp: false,

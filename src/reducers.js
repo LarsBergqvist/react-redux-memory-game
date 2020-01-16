@@ -70,7 +70,7 @@ function memoryGame(state = initialState, action) {
         case CHECK_MATCHED_PAIR:
             if (state.numClicksWithinTurn === 2 && cardsHaveIdenticalImages(state.firstId, state.secondId, state.cards)) {
                 // PAIR MATCHED
-                let pairsFound = state.pairsFound + 1;
+                const pairsFound = state.pairsFound + 1;
                 let gameComplete = false;
                 if (pairsFound === NUM_IMAGES) {
                     gameComplete = true;
@@ -96,11 +96,11 @@ function memoryGame(state = initialState, action) {
             if (state.numClicksWithinTurn === 2) {
                 // Two cards are already flipped
                 // Check for match and trigger a new flip
-                let s = memoryGame(state, checkMatchedPair());
+                const s = memoryGame(state, checkMatchedPair());
                 return memoryGame(s, flipUpCard(action.id));
             }
 
-            let card = getCard(action.id, state.cards);
+            const card = getCard(action.id, state.cards);
             if (card.imageUp || card.matched) {
                 return state;
             }
@@ -112,7 +112,7 @@ function memoryGame(state = initialState, action) {
             } else {
                 secondId = action.id;
             }
-            let numClicks = state.numClicksWithinTurn + 1;
+            const numClicks = state.numClicksWithinTurn + 1;
 
             return Object.assign({}, state, {
                 firstId: firstId,

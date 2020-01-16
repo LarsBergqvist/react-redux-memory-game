@@ -8,7 +8,7 @@ import { shuffleCards } from './actions';
 import { Provider } from 'react-redux'
 import * as serviceWorker from './serviceWorker';
 
-let store = createStore(memoryGame);
+const store = createStore(memoryGame);
 store.dispatch(shuffleCards());
 
 ReactDOM.render(

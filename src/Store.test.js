@@ -10,20 +10,20 @@ import { getCard } from './cardFunctions';
 //
 
 test('Check number of cards in the game', () => {
-    let store = createStore(memoryGame);
-    let state = store.getState();
+    const store = createStore(memoryGame);
+    const state = store.getState();
     expect(state.cards.length).toBe(20);
 });
 
 test('Test that flipUpCard turns image up', () => {
-    let store = createStore(memoryGame);
+    const store = createStore(memoryGame);
     expect(getCard(1, store.getState().cards).imageUp).toBe(false);
     store.dispatch(flipUpCard(1));
     expect(getCard(1, store.getState().cards).imageUp).toBe(true);
 });
 
 test('Test that 3rd card flip checks for matches on previous cards and that the 3rd flip is valid', () => {
-    let store = createStore(memoryGame);
+    const store = createStore(memoryGame);
     store.dispatch(flipUpCard(1));
     store.dispatch(flipUpCard(2));
     store.dispatch(flipUpCard(3));
@@ -35,7 +35,7 @@ test('Test that 3rd card flip checks for matches on previous cards and that the 
 });
 
 test('Test that pair is found after flipping two cards with same image', () => {
-    let store = createStore(memoryGame);
+    const store = createStore(memoryGame);
     expect(store.getState().pairsFound).toBe(0);
     // flip the first card
     store.dispatch(flipUpCard(1));
@@ -52,7 +52,7 @@ test('Test that pair is found after flipping two cards with same image', () => {
 });
 
 test('Test that pair is not found after flipping two cards with different images', () => {
-    let store = createStore(memoryGame);
+    const store = createStore(memoryGame);
     expect(store.getState().pairsFound).toBe(0);
     store.dispatch(flipUpCard(1));
     store.dispatch(flipUpCard(3));
@@ -62,7 +62,7 @@ test('Test that pair is not found after flipping two cards with different images
 });
 
 test('Test that the game is completed after all pairs are found', () => {
-    let store = createStore(memoryGame);
+    const store = createStore(memoryGame);
     expect(store.getState().gameComplete).toBe(false);
 
     // Flip the first 9 pairs
@@ -83,7 +83,7 @@ test('Test that the game is completed after all pairs are found', () => {
 });
 
 test('Test that turnNo is updated', () => {
-    let store = createStore(memoryGame);
+    const store = createStore(memoryGame);
     expect(store.getState().turnNo).toBe(1);
 
     // Flip some cards and check that turnNo is updated
