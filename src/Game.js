@@ -10,22 +10,19 @@ class Game extends Component {
     }
 
     getCardViews() {
-        let cardViews = [];
-        let onClick = this.props.onCardClicked;
-        this.props.cards.forEach(c => {
-            let cardView = <CardView key={c.id}
+        const cardViews = this.props.cards.map(c =>
+            <CardView key={c.id}
                 id={c.id}
                 image={c.image}
                 imageUp={c.imageUp}
                 matched={c.matched}
-                onClick={onClick} />
-            cardViews.push(cardView);
-        });
+                onClick={this.props.onCardClicked} />
+            );
         return cardViews;
     }
 
     render() {
-        let cardViews = this.getCardViews();
+        const cardViews = this.getCardViews();
         let gameStatus = <div className='Game-status'>
             <div>Turn: {this.props.turnNo}</div>
             <div>Pairs found: {this.props.pairsFound}</div>
