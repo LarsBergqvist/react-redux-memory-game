@@ -1,0 +1,20 @@
+
+dist: xenial
+sudo: false
+
+language: node_js
+node_js:
+  - "10"
+
+cache:
+  directories:
+     - ./node_modules
+
+install:
+  - yarn install
+
+test:
+  - yarn test
+
+script:
+  - yarn build
