@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { flipUpCard, checkMatchedPair, initGame } from './actions';
 
 class Game extends Component {
-    componentWillMount() {
+    componentDidMount() {
         setInterval(this.props.onCheckForMatchedPair, 5000);
     }
 

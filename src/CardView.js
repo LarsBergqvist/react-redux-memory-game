@@ -15,8 +15,8 @@ class CardView extends Component {
     }
 
     render() {
-        const imPath = `./images/${this.props.image}.jpg`;
-        const backPath = './images/back.jpg';
+        const imPath = `./react-redux-memory-game/images/${this.props.image}.jpg`;
+        const backPath = './react-redux-memory-game/images/back.jpg';
 
         let className = 'Card flip-card';
         if (this.props.matched) {
