@@ -1,4 +1,6 @@
 # react-redux-memory-game
+[![Build Status](https://travis-ci.org/LarsBergqvist/react-redux-memory-game.svg?branch=master)](https://travis-ci.org/LarsBergqvist/react-redux-memory-game)
+<p>
 
 ```javascript
     git clone https://github.com/LarsBergqvist/react-redux-memory-game
