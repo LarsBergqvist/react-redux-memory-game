@@ -31,10 +31,10 @@ class CardView extends Component {
             >
             <div className="flip-card-inner">
               <div className="flip-card-front">
-                  <img src={`${backPath}`} alt=''/>
+                  <img src={`${backPath}`} draggable='false' alt=''/>
               </div>
               <div className="flip-card-back">
-                  <img src={`${imPath}`} alt='' />
+                  <img src={`${imPath}`} draggable='false' alt='' />
               </div>
             </div>
           </div> 

@@ -26,6 +26,7 @@ class Game extends Component {
         let gameStatus = <div className='Game-status'>
             <div>Turn: {this.props.turnNo}</div>
             <div>Pairs found: {this.props.pairsFound}</div>
+            <div><button onClick={this.props.onPlayAgain}>RESET GAME</button></div>
         </div>;
 
         if (this.props.gameComplete) {
@@ -38,7 +39,7 @@ class Game extends Component {
         return (
             <div className='Game'>
                 <header className='Game-header'>
-                    <div className='Game-title'>A Memory game in React</div>
+                    <div className='Game-title'>A Memory game in React with Redux</div>
                 </header>
                 <div>
                     {gameStatus}
