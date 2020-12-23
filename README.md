@@ -8,7 +8,7 @@
     yarn install
     yarn start
 ```
-<p>Try it out live here: https://build-jimhhpgcqp.now.sh/
+<p>Try it out live here: https://larsbergqvist.github.io/react-redux-memory-game/
 
 <p>This is a rewrite of https://github.com/LarsBergqvist/react-memory-simple that uses Redux as a state container for the application instead of using the states within the React components
 <p>Browse to http://localhost:3000
