@@ -9,25 +9,35 @@ class CardView extends Component {
 
     onClick() {
         if (!this.props.matched && !this.props.imageUp) {
+            this.setState({fade: true});
             this.props.onClick(this.props.id);
         }
     }
 
     render() {
-        let imPath = './images/';
-        if (this.props.imageUp) {
-            imPath = imPath + this.props.image + '.jpg';
-        } else {
-            imPath = imPath + 'back.jpg';
-        }
+        const imPath = `./images/${this.props.image}.jpg`;
+        const backPath = './images/back.jpg';
 
-        let className = 'Card';
+        let className = 'Card flip-card';
         if (this.props.matched) {
             className = className + ' Matched';
         }
+        const classNameWithFade = className + ' animate';
 
         return (
-            <img className={className} src={`${imPath}`} alt='' onClick={this.onClick} />
+            <div
+                onClick={this.onClick}
+                className={this.props.imageUp ? classNameWithFade: className} 
+            >
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                  <img src={`${backPath}`} alt=''/>
+              </div>
+              <div class="flip-card-back">
+                  <img src={`${imPath}`} alt='' />
+              </div>
+            </div>
+          </div> 
         );
     };
 };
