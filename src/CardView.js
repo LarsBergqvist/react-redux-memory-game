@@ -29,11 +29,11 @@ class CardView extends Component {
                 onClick={this.onClick}
                 className={this.props.imageUp ? classNameWithFade: className} 
             >
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
+            <div className="flip-card-inner">
+              <div className="flip-card-front">
                   <img src={`${backPath}`} alt=''/>
               </div>
-              <div class="flip-card-back">
+              <div className="flip-card-back">
                   <img src={`${imPath}`} alt='' />
               </div>
             </div>
