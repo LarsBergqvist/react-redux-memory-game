@@ -5,8 +5,7 @@ import App from './App';
 import { createStore } from 'redux'
 import memoryGame from './reducers'
 import { shuffleCards } from './actions';
-import { Provider } from 'react-redux'
-import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
 
 const store = createStore(memoryGame);
 store.dispatch(shuffleCards());
@@ -16,8 +15,3 @@ ReactDOM.render(
     <App />
   </Provider>
   , document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.register();
