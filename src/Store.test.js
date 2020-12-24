@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
 import memoryGame from './reducers'
-import { flipUpCard, checkMatchedPair } from './actions';
-import { getCard } from './cardFunctions';
+import { flipUpCard, checkMatchedPair, generatePairs, initGame, showNumCardsSelection } from './actions';
+import { MAX_PAIRS, getCard } from './cardFunctions';
 
 //
 // These tests uses the initial, un-shuffled state
@@ -11,12 +11,30 @@ import { getCard } from './cardFunctions';
 
 test('Check number of cards in the game', () => {
     const store = createStore(memoryGame);
+    store.dispatch(generatePairs(MAX_PAIRS));
     const state = store.getState();
-    expect(state.cards.length).toBe(20);
+    expect(state.cards.length).toBe(MAX_PAIRS*2);
+});
+
+test('Check number of cards in the game after initGame', () => {
+    const store = createStore(memoryGame);
+    store.dispatch(initGame(2));  // will go generatePairs + shuffleCards
+    const state = store.getState();
+    expect(state.cards.length).toBe(4);
+});
+
+test('Check showNumCardsSelection', () => {
+    const store = createStore(memoryGame);
+    const state = store.getState();
+    expect(state.showNumCardsSelection).toBeFalsy();
+    store.dispatch(showNumCardsSelection());
+    const stateAfterDispatch = store.getState();
+    expect(stateAfterDispatch.showNumCardsSelection).toBeTruthy();
 });
 
 test('Test that flipUpCard turns image up', () => {
     const store = createStore(memoryGame);
+    store.dispatch(generatePairs(MAX_PAIRS));
     expect(getCard(1, store.getState().cards).imageUp).toBe(false);
     store.dispatch(flipUpCard(1));
     expect(getCard(1, store.getState().cards).imageUp).toBe(true);
@@ -24,6 +42,7 @@ test('Test that flipUpCard turns image up', () => {
 
 test('Test that 3rd card flip checks for matches on previous cards and that the 3rd flip is valid', () => {
     const store = createStore(memoryGame);
+    store.dispatch(generatePairs(MAX_PAIRS));
     store.dispatch(flipUpCard(1));
     store.dispatch(flipUpCard(2));
     store.dispatch(flipUpCard(3));
@@ -36,6 +55,7 @@ test('Test that 3rd card flip checks for matches on previous cards and that the 
 
 test('Test that pair is found after flipping two cards with same image', () => {
     const store = createStore(memoryGame);
+    store.dispatch(generatePairs(MAX_PAIRS));
     expect(store.getState().pairsFound).toBe(0);
     // flip the first card
     store.dispatch(flipUpCard(1));
@@ -53,6 +73,7 @@ test('Test that pair is found after flipping two cards with same image', () => {
 
 test('Test that pair is not found after flipping two cards with different images', () => {
     const store = createStore(memoryGame);
+    store.dispatch(generatePairs(MAX_PAIRS));
     expect(store.getState().pairsFound).toBe(0);
     store.dispatch(flipUpCard(1));
     store.dispatch(flipUpCard(3));
@@ -63,6 +84,7 @@ test('Test that pair is not found after flipping two cards with different images
 
 test('Test that the game is completed after all pairs are found', () => {
     const store = createStore(memoryGame);
+    store.dispatch(generatePairs(MAX_PAIRS));
     expect(store.getState().gameComplete).toBe(false);
 
     // Flip the first 9 pairs
@@ -84,6 +106,7 @@ test('Test that the game is completed after all pairs are found', () => {
 
 test('Test that turnNo is updated', () => {
     const store = createStore(memoryGame);
+    store.dispatch(generatePairs(MAX_PAIRS));
     expect(store.getState().turnNo).toBe(1);
 
     // Flip some cards and check that turnNo is updated

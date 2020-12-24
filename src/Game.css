@@ -15,6 +15,15 @@
 
 .Game-status {
     padding: 20px;
+    white-space: pre;
+}
+
+.Game-button {
+    font-size: 1.5em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+    border-radius: 15px;
 }
 
 .Game-intro {
@@ -30,6 +39,15 @@
     margin-left: 10px;
     width: 100px;
 }
+
+.num-cards-button-container > button {
+    font-size: 3.5em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+    border-radius: 15px;
+}
+
 
 .Matched {
     border-color: #55cc88;

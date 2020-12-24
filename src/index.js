@@ -4,11 +4,12 @@ import './index.css';
 import App from './App';
 import { createStore } from 'redux'
 import memoryGame from './reducers'
-import { shuffleCards } from './actions';
+import { initGame } from './actions';
 import { Provider } from 'react-redux';
+import { MAX_PAIRS } from './cardFunctions';
 
 const store = createStore(memoryGame);
-store.dispatch(shuffleCards());
+store.dispatch(initGame(MAX_PAIRS));
 
 ReactDOM.render(
   <Provider store={store}>

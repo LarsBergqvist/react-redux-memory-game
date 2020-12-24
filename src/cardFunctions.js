@@ -1,12 +1,12 @@
-export const NUM_IMAGES = 10;
+export const MAX_PAIRS = 10;
 
-export function generateCardSet() {
+export function generateCardSet(numPairs) {
     //
     // Generate a set of cards with image pairs
     //
     const cards = [];
     let id = 1;
-    for (let i = 1; i <= NUM_IMAGES; i++) {
+    for (let i = 1; i <= numPairs; i++) {
         const card1 = {
             id: id,
             image: i,
@@ -29,11 +29,7 @@ export function generateCardSet() {
 };
 
 export function getCard(id, cards) {
-    for (let i = 0; i < 2 * NUM_IMAGES; i++) {
-        if (cards[i].id === id) {
-            return cards[i];
-        }
-    };
+    return cards.find(c => c.id === id)
 }
 
 export function cardsHaveIdenticalImages(id1, id2, cards) {
