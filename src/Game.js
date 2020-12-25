@@ -5,11 +5,9 @@ import { connect } from 'react-redux'
 import { flipUpCard, checkMatchedPair, initGame, showNumCardsSelection } from './actions';
 import { MAX_PAIRS } from './cardFunctions';
 
-class Game extends Component {
-    componentDidMount() {
-        setInterval(this.props.onCheckForMatchedPair, 5000);
-    }
+let timeOut = null;
 
+class Game extends Component {
     getCardViews() {
         const cardViews = this.props.cards.map(c =>
             <CardView key={c.id}
@@ -30,6 +28,7 @@ class Game extends Component {
             gameStatus = <div className='Game-status'>
                 <div>Select number of cards for new game</div>
                 <div className='num-cards-button-container'>
+                    <button onClick={() => this.props.onInitGame(3)}>{6}</button>
                     <button onClick={() => this.props.onInitGame(MAX_PAIRS / 2)}>{MAX_PAIRS}</button>
                     <button onClick={() => this.props.onInitGame(MAX_PAIRS)}>{MAX_PAIRS * 2}</button>
                 </div>
@@ -77,9 +76,10 @@ const mapDispatchToProps = dispatch => {
     return {
         onCardClicked: id => {
             dispatch(flipUpCard(id));
-        },
-        onCheckForMatchedPair: () => {
-            dispatch(checkMatchedPair());
+            clearInterval(timeOut);
+            timeOut = setTimeout(() => {
+                dispatch(checkMatchedPair())
+            }, 5000)
         },
         onShowNumCardsSelection: () => {
             dispatch(showNumCardsSelection());
