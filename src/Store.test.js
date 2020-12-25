@@ -1,6 +1,6 @@
 import { createStore } from 'redux'
 import memoryGame from './reducers'
-import { flipUpCard, checkMatchedPair, generatePairs, initGame, showNumCardsSelection } from './actions';
+import { checkMatchedPair, flipUpCard, generatePairs, initGame, showNumCardsSelection } from './actions';
 import { MAX_PAIRS, getCard } from './cardFunctions';
 
 //

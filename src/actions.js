@@ -1,5 +1,6 @@
 export const FLIP_UP_CARD = 'FLIP_UP_CARD';
 export const SHUFFLE_CARDS = 'SHUFFLE_CARDS';
+export const CHECK_UNMATCHED_PAIR = 'CHECK_UNMATCHED_PAIR';
 export const CHECK_MATCHED_PAIR = 'CHECK_MATCHED_PAIR';
 export const MARK_PAIR_AS_MATCHED = 'MARK_PAIR_AS_MATCHED';
 export const FLIP_DOWN_PAIR = 'FLIP_DOWN_PAIR';
@@ -24,6 +25,10 @@ export function flipDownPair(id1, id2) {
 }
 export function markPairAsMatched(id1, id2) {
     return { type: MARK_PAIR_AS_MATCHED, id1: id1, id2: id2 }
+}
+
+export function checkUnmatchedPair() {
+    return { type: CHECK_UNMATCHED_PAIR };
 }
 
 export function checkMatchedPair() {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Game.css';
 import CardView from './CardView';
 import { connect } from 'react-redux'
-import { flipUpCard, checkMatchedPair, initGame, showNumCardsSelection } from './actions';
+import { flipUpCard, checkUnmatchedPair, checkMatchedPair, initGame, showNumCardsSelection } from './actions';
 import { MAX_PAIRS } from './cardFunctions';
 
 let timeOut = null;
@@ -75,11 +75,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onCardClicked: id => {
-            dispatch(flipUpCard(id));
             clearInterval(timeOut);
+            dispatch(flipUpCard(id));
+            dispatch(checkMatchedPair());
             timeOut = setTimeout(() => {
-                dispatch(checkMatchedPair())
-            }, 5000)
+                dispatch(checkUnmatchedPair())
+            }, 4000)
         },
         onShowNumCardsSelection: () => {
             dispatch(showNumCardsSelection());

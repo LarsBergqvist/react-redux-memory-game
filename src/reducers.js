@@ -1,7 +1,7 @@
 import {
-    GENERATE_PAIRS, FLIP_UP_CARD, SHUFFLE_CARDS, CHECK_MATCHED_PAIR, markPairAsMatched,
+    GENERATE_PAIRS, FLIP_UP_CARD, SHUFFLE_CARDS, CHECK_UNMATCHED_PAIR, markPairAsMatched,
     MARK_PAIR_AS_MATCHED, flipDownPair, FLIP_DOWN_PAIR, INIT_GAME,
-    shuffleCards, checkMatchedPair, flipUpCard, generatePairs, SHOW_NUM_CARDS_SELECTION
+    shuffleCards, checkUnmatchedPair, checkMatchedPair, generatePairs, SHOW_NUM_CARDS_SELECTION, CHECK_MATCHED_PAIR
 } from "./actions";
 import shuffle from 'shuffle-array';
 import { generateCardSet, getCard, cardsHaveIdenticalImages } from './cardFunctions';
@@ -78,30 +78,51 @@ function memoryGame(state = initialState, action) {
             const cards = memoryCards(initialState.cards, generatePairs(action.numPairs));
             return Object.assign({}, initialState, { showNumCardsSelection: false, cards: memoryCards(cards, shuffleCards()) });
 
-        case CHECK_MATCHED_PAIR:
+        case CHECK_UNMATCHED_PAIR:
             if (state.numClicksWithinTurn === 2 && !cardsHaveIdenticalImages(state.firstId, state.secondId, state.cards)) {
                 // PAIR DID NOT MATCH
                 return Object.assign({}, state, {
                     numClicksWithinTurn: 0,
+                    firstId: undefined,
+                    secondId: undefined,
                     turnNo: state.turnNo + 1,
                     cards: memoryCards(state.cards, flipDownPair(state.firstId, state.secondId))
                 });
             }
             return state;
 
-        case FLIP_UP_CARD:
-            if (state.numClicksWithinTurn === 2) {
-                // Two cards are already flipped
-                // Check for match and trigger a new flip
-                const s = memoryGame(state, checkMatchedPair());
-                return memoryGame(s, flipUpCard(action.id));
+        case CHECK_MATCHED_PAIR:
+            if (state.numClicksWithinTurn === 2 && cardsHaveIdenticalImages(state.firstId, state.secondId, state.cards)) {
+                // PAIR MATCHED
+                const pairsFound = state.pairsFound + 1;
+                let gameComplete = false;
+                if (pairsFound === state.cards.length / 2) {
+                    gameComplete = true;
+                }
+                return Object.assign({}, state, {
+                    pairsFound: pairsFound,
+                    turnNo: state.turnNo + 1,
+                    numClicksWithinTurn: 0,
+                    gameComplete: gameComplete,
+                    cards: memoryCards(state.cards, markPairAsMatched(state.firstId, state.secondId))
+                });
             }
+            return state;
 
+        case FLIP_UP_CARD:
             const card = getCard(action.id, state.cards);
             if (card.imageUp || card.matched) {
-                // Clicked on an already flipped card
+                // Selected an already flipped card
                 // or a card that has already been matched
                 return state;
+            }
+
+            if (state.numClicksWithinTurn === 2) {
+                // Two cards are already flipped
+                // Check for unmatch and trigger a new flip
+                const s1 = memoryGame(state, checkMatchedPair());
+                const s2 = memoryGame(s1, checkUnmatchedPair());
+                return Object.assign({}, s2, { firstId: action.id, numClicksWithinTurn: 1 }, { cards: memoryCards(s2.cards, action) });
             }
 
             let firstId = state.firstId;
@@ -113,29 +134,12 @@ function memoryGame(state = initialState, action) {
             }
             const numClicks = state.numClicksWithinTurn + 1;
 
-            const newState = Object.assign({}, state, {
+            return Object.assign({}, state, {
                 firstId: firstId,
                 secondId: secondId,
                 numClicksWithinTurn: numClicks,
                 cards: memoryCards(state.cards, action)
             });
-
-            if (newState.numClicksWithinTurn === 2 && cardsHaveIdenticalImages(newState.firstId, newState.secondId, newState.cards)) {
-                // PAIR MATCHED
-                const pairsFound = newState.pairsFound + 1;
-                let gameComplete = false;
-                if (pairsFound === newState.cards.length / 2) {
-                    gameComplete = true;
-                }
-                return Object.assign({}, newState, {
-                    pairsFound: pairsFound,
-                    turnNo: state.turnNo + 1,
-                    numClicksWithinTurn: 0,
-                    gameComplete: gameComplete,
-                    cards: memoryCards(newState.cards, markPairAsMatched(newState.firstId, newState.secondId))
-                });
-            }
-            return newState;
 
         case SHUFFLE_CARDS:
             return Object.assign({}, state, { cards: memoryCards(state.cards, action) });
