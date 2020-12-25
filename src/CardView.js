@@ -9,7 +9,7 @@ class CardView extends Component {
 
     onClick() {
         if (!this.props.matched && !this.props.imageUp) {
-            this.setState({fade: true});
+            this.setState({ fade: true });
             this.props.onClick(this.props.id);
         }
     }
@@ -27,17 +27,17 @@ class CardView extends Component {
         return (
             <div
                 onClick={this.onClick}
-                className={this.props.imageUp ? classNameWithFade: className} 
+                className={this.props.imageUp ? classNameWithFade : className}
             >
-            <div className="flip-card-inner">
-              <div className="flip-card-front">
-                  <img src={`${backPath}`} draggable='false' alt=''/>
-              </div>
-              <div className="flip-card-back">
-                  <img src={`${imPath}`} draggable='false' alt='' />
-              </div>
+                <div className="flip-card-inner">
+                    <div className="flip-card-front">
+                        <img src={`${backPath}`} draggable='false' alt='' />
+                    </div>
+                    <div className="flip-card-back">
+                        <img src={`${imPath}`} draggable='false' alt='' />
+                    </div>
+                </div>
             </div>
-          </div> 
         );
     };
 };

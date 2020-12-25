@@ -69,7 +69,7 @@ function memoryCards(state = [], action) {
 function memoryGame(state = initialState, action) {
     switch (action.type) {
         case SHOW_NUM_CARDS_SELECTION:
-            return Object.assign({}, initialState, { showNumCardsSelection: true } );
+            return Object.assign({}, initialState, { showNumCardsSelection: true });
 
         case GENERATE_PAIRS:
             return Object.assign({}, initialState, { cards: memoryCards(initialState.cards, generatePairs(action.numPairs)) });
@@ -83,7 +83,7 @@ function memoryGame(state = initialState, action) {
                 // PAIR MATCHED
                 const pairsFound = state.pairsFound + 1;
                 let gameComplete = false;
-                if (pairsFound === state.cards.length/2) {
+                if (pairsFound === state.cards.length / 2) {
                     gameComplete = true;
                 }
                 return Object.assign({}, state, {

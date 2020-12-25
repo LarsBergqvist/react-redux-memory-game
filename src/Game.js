@@ -18,39 +18,34 @@ class Game extends Component {
                 imageUp={c.imageUp}
                 matched={c.matched}
                 onClick={this.props.onCardClicked} />
-            );
+        );
         return cardViews;
     }
 
     render() {
         const cardViews = this.getCardViews();
         let gameStatus = undefined;
-        
-        if (this.props.showNumCardsSelection)
-        {
+
+        if (this.props.showNumCardsSelection) {
             gameStatus = <div className='Game-status'>
                 <div>Select number of cards for new game</div>
                 <div className='num-cards-button-container'>
-                    <button onClick={() => this.props.onInitGame(MAX_PAIRS/2)}>{MAX_PAIRS}</button>
-                    <button onClick={() => this.props.onInitGame(MAX_PAIRS)}>{MAX_PAIRS*2}</button>
+                    <button onClick={() => this.props.onInitGame(MAX_PAIRS / 2)}>{MAX_PAIRS}</button>
+                    <button onClick={() => this.props.onInitGame(MAX_PAIRS)}>{MAX_PAIRS * 2}</button>
                 </div>
-                <div>
-                </div>
-
             </div>;
         } else if (this.props.gameComplete) {
             gameStatus = <div className='Game-status'>
                 <div>GAME COMPLETE!</div>
                 <div>You used {this.props.turnNo - 1} turns</div>
                 <div><button className='Game-button' onClick={this.props.onShowNumCardsSelection}>Play again?</button></div></div>;
-        } else
-        {
+        } else {
             gameStatus = <div className='Game-status'>
                 Turn: {this.props.turnNo}   Pairs found: {this.props.pairsFound}
                 <button className='Game-button' onClick={this.props.onShowNumCardsSelection}>NEW GAME</button>
             </div>;
         }
-        
+
         return (
             <div className='Game'>
                 <header className='Game-header'>

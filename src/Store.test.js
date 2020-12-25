@@ -13,7 +13,7 @@ test('Check number of cards in the game', () => {
     const store = createStore(memoryGame);
     store.dispatch(generatePairs(MAX_PAIRS));
     const state = store.getState();
-    expect(state.cards.length).toBe(MAX_PAIRS*2);
+    expect(state.cards.length).toBe(MAX_PAIRS * 2);
 });
 
 test('Check number of cards in the game after initGame', () => {

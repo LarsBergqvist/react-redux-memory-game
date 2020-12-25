@@ -12,7 +12,7 @@ const store = createStore(memoryGame);
 store.dispatch(initGame(MAX_PAIRS));
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-  , document.getElementById('root'));
+    <Provider store={store}>
+        <App />
+    </Provider>
+    , document.getElementById('root'));
