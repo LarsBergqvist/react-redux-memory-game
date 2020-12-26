@@ -1,45 +1,34 @@
-import React, { Component } from 'react';
 import './Game.css';
 
-class CardView extends Component {
-    constructor(props) {
-        super(props);
-        this.onClick = this.onClick.bind(this);
+function CardView(props) {
+    const imPath = `${window.location.href}/images/${props.image}.jpg`;
+    const backPath = `${window.location.href}/images/back.jpg`;
+
+    let className = 'Card flip-card';
+    if (props.matched) {
+        className = className + ' Matched';
     }
+    const classNameWithAnimation = className + ' animate';
 
-    onClick() {
-        if (!this.props.matched && !this.props.imageUp) {
-            this.setState({ fade: true });
-            this.props.onClick(this.props.id);
-        }
-    }
-
-    render() {
-        const imPath = `${window.location.href}/images/${this.props.image}.jpg`;
-        const backPath = `${window.location.href}/images/back.jpg`;
-
-        let className = 'Card flip-card';
-        if (this.props.matched) {
-            className = className + ' Matched';
-        }
-        const classNameWithFade = className + ' animate';
-
-        return (
-            <div
-                onClick={this.onClick}
-                className={this.props.imageUp ? classNameWithFade : className}
-            >
-                <div className="flip-card-inner">
-                    <div className="flip-card-front">
-                        <img src={`${backPath}`} draggable='false' alt='' />
-                    </div>
-                    <div className="flip-card-back">
-                        <img src={`${imPath}`} draggable='false' alt='' />
-                    </div>
+    return (
+        <div
+            onClick={() => {
+                if (!props.matched && !props.imageUp) {
+                    props.onClick(props.id);
+                }
+            }}
+            className={props.imageUp ? classNameWithAnimation : className}
+        >
+            <div className="flip-card-inner">
+                <div className="flip-card-front">
+                    <img src={`${backPath}`} draggable='false' alt='' />
+                </div>
+                <div className="flip-card-back">
+                    <img src={`${imPath}`} draggable='false' alt='' />
                 </div>
             </div>
-        );
-    };
+        </div>
+    );
 };
 
 export default CardView;
