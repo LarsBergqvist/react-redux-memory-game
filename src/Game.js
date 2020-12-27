@@ -71,7 +71,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(checkMatchedPair());
             timeOut = setTimeout(() => {
                 dispatch(checkUnmatchedPair())
-            }, 4000)
+            }, 4000);
         },
         onShowNumCardsSelection: () => {
             dispatch(showNumCardsSelection());
