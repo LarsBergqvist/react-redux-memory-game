@@ -13,18 +13,18 @@ export function showNumCardsSelection() {
 }
 
 export function generatePairs(numPairs) {
-    return { type: GENERATE_PAIRS, numPairs: numPairs };
+    return { type: GENERATE_PAIRS, numPairs };
 }
 
 export function initGame(numPairs) {
-    return { type: INIT_GAME, numPairs: numPairs };
+    return { type: INIT_GAME, numPairs };
 }
 
 export function flipDownPair(id1, id2) {
-    return { type: FLIP_DOWN_PAIR, id1: id1, id2: id2 }
+    return { type: FLIP_DOWN_PAIR, id1, id2 }
 }
 export function markPairAsMatched(id1, id2) {
-    return { type: MARK_PAIR_AS_MATCHED, id1: id1, id2: id2 }
+    return { type: MARK_PAIR_AS_MATCHED, id1, id2 }
 }
 
 export function checkUnmatchedPair() {

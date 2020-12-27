@@ -100,10 +100,10 @@ function memoryGame(state = initialState, action) {
                     gameComplete = true;
                 }
                 return Object.assign({}, state, {
-                    pairsFound: pairsFound,
+                    pairsFound,
                     turnNo: state.turnNo + 1,
                     numClicksWithinTurn: 0,
-                    gameComplete: gameComplete,
+                    gameComplete,
                     cards: memoryCards(state.cards, markPairAsMatched(state.firstId, state.secondId))
                 });
             }
@@ -119,7 +119,7 @@ function memoryGame(state = initialState, action) {
 
             if (state.numClicksWithinTurn === 2) {
                 // Two cards are already flipped
-                // Check for unmatch and trigger a new flip
+                // Check for match/unmatch and trigger a new flip
                 const s1 = memoryGame(state, checkMatchedPair());
                 const s2 = memoryGame(s1, checkUnmatchedPair());
                 return Object.assign({}, s2, { firstId: action.id, numClicksWithinTurn: 1 }, { cards: memoryCards(s2.cards, action) });
@@ -135,8 +135,8 @@ function memoryGame(state = initialState, action) {
             const numClicks = state.numClicksWithinTurn + 1;
 
             return Object.assign({}, state, {
-                firstId: firstId,
-                secondId: secondId,
+                firstId,
+                secondId,
                 numClicksWithinTurn: numClicks,
                 cards: memoryCards(state.cards, action)
             });
