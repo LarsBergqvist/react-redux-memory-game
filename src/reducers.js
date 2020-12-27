@@ -5,6 +5,7 @@ import {
 } from "./actions";
 import shuffle from 'shuffle-array';
 import { generateCardSet, getCard, cardsHaveIdenticalImages } from './cardFunctions';
+import undoable, { distinctState } from 'redux-undo';
 
 const initialState = {
     turnNo: 1,
@@ -149,4 +150,9 @@ function memoryGame(state = initialState, action) {
     }
 }
 
-export default memoryGame;
+const undoableMemoryGame = undoable(memoryGame, {
+    //    filter: distinctState()
+});
+
+export default undoableMemoryGame;
+// export default memoryGame;

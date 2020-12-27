@@ -13,6 +13,7 @@
     "react-scripts": "4.0.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "redux-undo": "^1.0.1",
     "shuffle-array": "^1.0.1",
     "web-vitals": "^0.2.4"
   },

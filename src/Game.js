@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { flipUpCard, checkUnmatchedPair, checkMatchedPair, initGame, showNumCardsSelection } from './actions';
 import NumCardsSelectionView from './NumCardsSelectionView';
 import GameStatusView from './GameStatusView';
+import UndoRedo from './UndoRedo';
 
 let timeOut = null;
 
@@ -35,6 +36,7 @@ class Game extends Component {
                 <div className='CardContainer'>
                     {cardViews}
                 </div>
+                <UndoRedo />
             </div>
         );
     }
@@ -55,11 +57,11 @@ class Game extends Component {
 
 const mapStateToProps = state => {
     return {
-        cards: state.cards,
-        turnNo: state.turnNo,
-        gameComplete: state.gameComplete,
-        pairsFound: state.pairsFound,
-        showNumCardsSelection: state.showNumCardsSelection
+        cards: state.present.cards,
+        turnNo: state.present.turnNo,
+        gameComplete: state.present.gameComplete,
+        pairsFound: state.present.pairsFound,
+        showNumCardsSelection: state.present.showNumCardsSelection
     }
 }
 
