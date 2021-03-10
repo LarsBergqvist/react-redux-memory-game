@@ -25,14 +25,14 @@ class Game extends Component {
         }
 
         return (
-            <div className='Game'>
-                <header className='Game-header'>
-                    <div className='Game-title'>A Memory game in React with Redux</div>
+            <div className='game'>
+                <header className='game-header'>
+                    <div className='game-title'>A Memory game in React with Redux</div>
                 </header>
-                <div className='Game-status'>
+                <div className='game-status'>
                     {gameHUD}
                 </div>
-                <div className='CardContainer'>
+                <div className='card-container'>
                     {cardViews}
                 </div>
             </div>

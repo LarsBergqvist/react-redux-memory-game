@@ -1,72 +1,77 @@
-.Game {
+.game {
   text-align: center;
+  background-color: gray;
 }
 
-.Game-header {
+img {
+    border: 5px solid white;
+}
+
+.game-header {
   background-color: #222;
   height: 50px;
   padding: 20px;
   color: white;
 }
 
-.Game-title {
+.game-title {
   font-size: 1.5em;
 }
 
-.Game-status {
+.game-status {
   padding: 20px;
   white-space: pre;
 }
 
-.Game-button {
+.game-button {
   font-size: 1.5em;
   margin-left: 0.5em;
   margin-right: 0.5em;
   margin-top: 0.5em;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
-.Game-intro {
+.game-intro {
   font-size: large;
 }
 
-.Card {
+.card {
   display: inline-block;
-  border-color: white;
+  border-color: transparent;
   border-width: 5px;
   border-style: solid;
   margin-bottom: 10px;
   margin-left: 10px;
-  width: 100px;
+  width: 110px;
 }
 
 .num-cards-button-container > button {
   font-size: 3.5em;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
+  margin-left: 0.2em;
+  margin-right: 0.2em;
   margin-top: 0.5em;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
-.Matched {
+.matched {
   border-color: #55cc88;
 }
 
-.CardContainer {
+.card-container {
   display: inline-block;
   max-width: 950px;
   margin: "20px auto";
 }
 
 .flip-card {
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   perspective: 1000px;
 }
 
 .flip-card-inner {
-  width: 100%;
-  height: 100%;
+  width: 110px;
+  height: 110px;
   transition: transform 0.7s;
   transform-style: preserve-3d;
 }
@@ -78,8 +83,8 @@
 .flip-card-front,
 .flip-card-back {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 110px;
+  height: 110px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }

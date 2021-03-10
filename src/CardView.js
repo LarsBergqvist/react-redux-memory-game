@@ -4,9 +4,9 @@ function CardView(props) {
     const imPath = `${window.location.href}/images/${props.image}.jpg`;
     const backPath = `${window.location.href}/images/back.jpg`;
 
-    let className = 'Card flip-card';
+    let className = 'card flip-card';
     if (props.matched) {
-        className = className + ' Matched';
+        className = className + ' matched';
     }
     const classNameWithAnimation = className + ' animate';
 

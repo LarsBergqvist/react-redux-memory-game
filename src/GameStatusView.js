@@ -3,12 +3,14 @@ function GameStatusView(props) {
         return <>
             <div>GAME COMPLETE!</div>
             <div>You used {props.turnNo - 1} turns</div>
-            <div><button className='Game-button' onClick={props.onShowNumCardsSelection}>Play again?</button></div>
+            <div><button className='game-button' onClick={props.onShowNumCardsSelection}>Play again?</button></div>
         </>;
     } else {
         return <>
-            Turn: {props.turnNo}   Pairs found: {props.pairsFound}
-            <button className='Game-button' onClick={props.onShowNumCardsSelection}>NEW GAME</button>
+            <div>
+                Turn: {props.turnNo}   Pairs found: {props.pairsFound}
+            </div>
+            <button className='game-button' onClick={props.onShowNumCardsSelection}>Restart game</button>
         </>;
     }
 }
