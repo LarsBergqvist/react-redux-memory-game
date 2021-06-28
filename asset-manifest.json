@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-redux-memory-game/static/css/main.7710993e.chunk.css",
-    "main.js": "/react-redux-memory-game/static/js/main.5451eebf.chunk.js",
-    "main.js.map": "/react-redux-memory-game/static/js/main.5451eebf.chunk.js.map",
+    "main.js": "/react-redux-memory-game/static/js/main.a4824d8e.chunk.js",
+    "main.js.map": "/react-redux-memory-game/static/js/main.a4824d8e.chunk.js.map",
     "runtime-main.js": "/react-redux-memory-game/static/js/runtime-main.824ad571.js",
     "runtime-main.js.map": "/react-redux-memory-game/static/js/runtime-main.824ad571.js.map",
     "static/js/2.f3fb8b50.chunk.js": "/react-redux-memory-game/static/js/2.f3fb8b50.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.824ad571.js",
     "static/js/2.f3fb8b50.chunk.js",
     "static/css/main.7710993e.chunk.css",
-    "static/js/main.5451eebf.chunk.js"
+    "static/js/main.a4824d8e.chunk.js"
   ]
 }
