@@ -14,24 +14,16 @@ jobs:
           node-version: '14'
       - name: Install packages
         run: yarn install
-      - name: Build for GitHub pages
-        run: |
-          yarn build
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Run tests
         run: |
           sudo apt-get install xvfb
           xvfb-run --auto-servernum yarn test
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
+      - name: Build for GitHub pages
+        run: |
+          yarn build
       - name: Deploy to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
           folder: build
-
+          
