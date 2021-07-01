@@ -31,6 +31,7 @@ img {
   margin-right: 0.5em;
   margin-top: 0.5em;
   border-radius: 5px;
+  background-color:bisque;
 }
 
 .game-intro {
@@ -53,6 +54,7 @@ img {
   margin-right: 0.2em;
   margin-top: 0.5em;
   border-radius: 5px;
+  background-color:bisque;
 }
 
 .matched {
