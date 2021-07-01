@@ -1,5 +1,6 @@
 # react-redux-memory-game
-[![Build Status](https://travis-ci.com/LarsBergqvist/react-redux-memory-game.svg?branch=master)](https://travis-ci.com/LarsBergqvist/react-redux-memory-game)
+![Build, test and deploy](https://github.com/larsbergqvist/react-redux-memory-game/actions/workflows/ci.yml/badge.svg)
+
 <p>
 
 ```javascript
