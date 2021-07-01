@@ -3,7 +3,7 @@ on:
   push:
     branches: [master]
 jobs:
-  build:
+  test-build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,4 +26,4 @@ jobs:
         with:
           branch: gh-pages
           folder: build
-          
+

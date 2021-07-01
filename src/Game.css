@@ -1,6 +1,8 @@
 .game {
   text-align: center;
-  background-color: gray;
+  background-color: none;
+  background-color: #353;
+
 }
 
 img {
@@ -8,7 +10,6 @@ img {
 }
 
 .game-header {
-  background-color: #222;
   height: 50px;
   padding: 20px;
   color: white;
@@ -21,6 +22,7 @@ img {
 .game-status {
   padding: 20px;
   white-space: pre;
+  color: white;
 }
 
 .game-button {
