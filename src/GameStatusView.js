@@ -1,3 +1,5 @@
+import React from 'react';
+
 function GameStatusView(props) {
     if (props.gameComplete) {
         return <>

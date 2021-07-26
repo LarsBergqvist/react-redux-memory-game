@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import './Game.css';
 
 function CardView(props) {
@@ -29,6 +31,14 @@ function CardView(props) {
             </div>
         </div>
     );
+}
+
+CardView.propTypes = {
+    matched: PropTypes.bool,
+    imageUp: PropTypes.bool,
+    onClick: PropTypes.func,
+    id: PropTypes.number,
+    image: PropTypes.number
 };
 
 export default CardView;

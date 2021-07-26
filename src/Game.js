@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Game.css';
 import CardView from './CardView';
 import { connect } from 'react-redux'
@@ -52,6 +53,17 @@ class Game extends Component {
     }
 }
 
+Game.propTypes = {
+    gameComplete: PropTypes.bool,
+    showNumCardsSelection: PropTypes.bool,
+    onShowNumCardsSelection: PropTypes.func,
+    cards: PropTypes.array,
+    onCardClicked: PropTypes.func,
+    onInitGame: PropTypes.func,
+    turnNo: PropTypes.number,
+    pairsFound: PropTypes.number,
+    image: PropTypes.string
+};
 
 const mapStateToProps = state => {
     return {
