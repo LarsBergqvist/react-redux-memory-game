@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { MAX_PAIRS } from './cardFunctions';
 
-const NumCardsSelectionView = (props) =>
+const NumCardsSelectionView = props =>
     <>
         <div>Select number of cards for new game</div>
         <div className='num-cards-button-container'>

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Game.css';
 
-function CardView(props) {
+const CardView = props => {
     const imPath = `${window.location.href}/images/${props.image}.jpg`;
     const backPath = `${window.location.href}/images/back.jpg`;
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './Game.css';
 import CardView from './CardView';
@@ -9,48 +9,42 @@ import GameStatusView from './GameStatusView';
 
 let timeOut = null;
 
-class Game extends Component {
-    render() {
-        const cardViews = this.getCardViews();
-        let gameHUD = undefined;
+const Game = props => {
+    const cardViews = props.cards.map(c =>
+        <CardView key={c.id}
+            id={c.id}
+            image={c.image}
+            imageUp={c.imageUp}
+            matched={c.matched}
+            onClick={props.onCardClicked} />
+    );
 
-        if (this.props.showNumCardsSelection) {
-            gameHUD = <NumCardsSelectionView onInitGame={this.props.onInitGame} />;
-        } else {
-            gameHUD = <GameStatusView
-                gameComplete={this.props.gameComplete}
-                turnNo={this.props.turnNo}
-                pairsFound={this.props.pairsFound}
-                onShowNumCardsSelection={this.props.onShowNumCardsSelection}
-            />;
-        }
+    let gameHUD = undefined;
 
-        return (
-            <div className='game'>
-                <header className='game-header'>
-                    <div className='game-title'>A Memory game in React with Redux</div>
-                </header>
-                <div className='game-status'>
-                    {gameHUD}
-                </div>
-                <div className='card-container'>
-                    {cardViews}
-                </div>
+    if (props.showNumCardsSelection) {
+        gameHUD = <NumCardsSelectionView onInitGame={props.onInitGame} />;
+    } else {
+        gameHUD = <GameStatusView
+            gameComplete={props.gameComplete}
+            turnNo={props.turnNo}
+            pairsFound={props.pairsFound}
+            onShowNumCardsSelection={props.onShowNumCardsSelection}
+        />;
+    }
+
+    return (
+        <div className='game'>
+            <header className='game-header'>
+                <div className='game-title'>A Memory game in React with Redux</div>
+            </header>
+            <div className='game-status'>
+                {gameHUD}
             </div>
-        );
-    }
-
-    getCardViews() {
-        const cardViews = this.props.cards.map(c =>
-            <CardView key={c.id}
-                id={c.id}
-                image={c.image}
-                imageUp={c.imageUp}
-                matched={c.matched}
-                onClick={this.props.onCardClicked} />
-        );
-        return cardViews;
-    }
+            <div className='card-container'>
+                {cardViews}
+            </div>
+        </div>
+    );
 }
 
 Game.propTypes = {
@@ -61,8 +55,7 @@ Game.propTypes = {
     onCardClicked: PropTypes.func,
     onInitGame: PropTypes.func,
     turnNo: PropTypes.number,
-    pairsFound: PropTypes.number,
-    image: PropTypes.string
+    pairsFound: PropTypes.number
 };
 
 const mapStateToProps = state => {
