@@ -2,7 +2,7 @@ import {
     GENERATE_PAIRS, FLIP_UP_CARD, SHUFFLE_CARDS, CHECK_UNMATCHED_PAIR, markPairAsMatched,
     MARK_PAIR_AS_MATCHED, flipDownPair, FLIP_DOWN_PAIR, INIT_GAME,
     shuffleCards, checkUnmatchedPair, checkMatchedPair, generatePairs, SHOW_NUM_CARDS_SELECTION, CHECK_MATCHED_PAIR
-} from "./actions";
+} from './actions';
 import shuffle from 'shuffle-array';
 import { generateCardSet, getCard, cardsHaveIdenticalImages } from './cardFunctions';
 
@@ -54,10 +54,11 @@ function memoryCards(state = [], action) {
         case GENERATE_PAIRS:
             return generateCardSet(action.numPairs);
 
-        case SHUFFLE_CARDS:
+        case SHUFFLE_CARDS: {
             let newCards = [...state];
             newCards = shuffle(newCards);
             return newCards;
+        }
 
         default:
             return state;
@@ -74,11 +75,12 @@ function memoryGame(state = initialState, action) {
         case GENERATE_PAIRS:
             return Object.assign({}, initialState, { cards: memoryCards(initialState.cards, generatePairs(action.numPairs)) });
 
-        case INIT_GAME:
+        case INIT_GAME: {
             const cards = memoryCards(initialState.cards, generatePairs(action.numPairs));
             return Object.assign({}, initialState, { showNumCardsSelection: false, cards: memoryCards(cards, shuffleCards()) });
+        }
 
-        case CHECK_UNMATCHED_PAIR:
+        case CHECK_UNMATCHED_PAIR: {
             if (state.numClicksWithinTurn === 2 && !cardsHaveIdenticalImages(state.firstId, state.secondId, state.cards)) {
                 // PAIR DID NOT MATCH
                 return Object.assign({}, state, {
@@ -90,8 +92,9 @@ function memoryGame(state = initialState, action) {
                 });
             }
             return state;
+        }
 
-        case CHECK_MATCHED_PAIR:
+        case CHECK_MATCHED_PAIR: {
             if (state.numClicksWithinTurn === 2 && cardsHaveIdenticalImages(state.firstId, state.secondId, state.cards)) {
                 // PAIR MATCHED
                 const pairsFound = state.pairsFound + 1;
@@ -108,8 +111,9 @@ function memoryGame(state = initialState, action) {
                 });
             }
             return state;
+        }
 
-        case FLIP_UP_CARD:
+        case FLIP_UP_CARD: {
             const card = getCard(action.id, state.cards);
             if (card.imageUp || card.matched) {
                 // Selected an already flipped card
@@ -140,6 +144,7 @@ function memoryGame(state = initialState, action) {
                 numClicksWithinTurn: numClicks,
                 cards: memoryCards(state.cards, action)
             });
+        }
 
         case SHUFFLE_CARDS:
             return Object.assign({}, state, { cards: memoryCards(state.cards, action) });

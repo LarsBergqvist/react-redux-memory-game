@@ -26,7 +26,7 @@ export function generateCardSet(numPairs) {
     }
 
     return cards;
-};
+}
 
 export function getCard(id, cards) {
     return cards.find(c => c.id === id)

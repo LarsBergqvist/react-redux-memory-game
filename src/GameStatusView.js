@@ -1,4 +1,7 @@
-function GameStatusView(props) {
+import React from 'react';
+import PropTypes from 'prop-types';
+
+const GameStatusView = props => {
     if (props.gameComplete) {
         return <>
             <div>GAME COMPLETE!</div>
@@ -14,5 +17,11 @@ function GameStatusView(props) {
         </>;
     }
 }
+
+GameStatusView.propTypes = {
+    gameComplete: PropTypes.bool,
+    onShowNumCardsSelection: PropTypes.func,
+    turnNo: PropTypes.number
+};
 
 export default GameStatusView;
