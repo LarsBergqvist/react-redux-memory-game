@@ -21,7 +21,8 @@ const GameStatusView = props => {
 GameStatusView.propTypes = {
     gameComplete: PropTypes.bool,
     onShowNumCardsSelection: PropTypes.func,
-    turnNo: PropTypes.number
+    turnNo: PropTypes.number,
+    pairsFound: PropTypes.number
 };
 
 export default GameStatusView;
