@@ -1,5 +1,5 @@
 # react-redux-memory-game
-![Build, test and deploy](https://github.com/larsbergqvist/react-redux-memory-game/actions/workflows/ci.yml/badge.svg)
+![Build, test and deploy](https://github.com/larsbergqvist/react-redux-memory-game/actions/workflows/cd.yml/badge.svg)
 
 <p>
 
