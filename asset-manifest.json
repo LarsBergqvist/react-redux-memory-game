@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-redux-memory-game/static/css/main.ed15ae90.css",
-    "main.js": "/react-redux-memory-game/static/js/main.fb64b073.js",
+    "main.js": "/react-redux-memory-game/static/js/main.167aacba.js",
     "index.html": "/react-redux-memory-game/index.html",
     "main.ed15ae90.css.map": "/react-redux-memory-game/static/css/main.ed15ae90.css.map",
-    "main.fb64b073.js.map": "/react-redux-memory-game/static/js/main.fb64b073.js.map"
+    "main.167aacba.js.map": "/react-redux-memory-game/static/js/main.167aacba.js.map"
   },
   "entrypoints": [
     "static/css/main.ed15ae90.css",
-    "static/js/main.fb64b073.js"
+    "static/js/main.167aacba.js"
   ]
 }
