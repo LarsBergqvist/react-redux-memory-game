@@ -7,17 +7,19 @@ module.exports = {
     'extends': [
         'eslint:recommended',
         'plugin:react/recommended',
-        'react-app'
+        'plugin:@typescript-eslint/recommended'
     ],
+    'parser': '@typescript-eslint/parser',
     'parserOptions': {
         'ecmaFeatures': {
             'jsx': true
         },
-        'ecmaVersion': 12,
+        'ecmaVersion': 'latest',
         'sourceType': 'module'
     },
     'plugins': [
-        'react'
+        'react',
+        '@typescript-eslint'
     ],
     'rules': {
         'indent': [
@@ -33,6 +35,7 @@ module.exports = {
             'warn',
             'single'
         ],
-        'no-unused-vars': 'warn'
+        'react/react-in-jsx-scope': 'off',
+        'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx', '.ts', '.tsx'] }],
     }
 };

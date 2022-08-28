@@ -1,12 +1,27 @@
 import {
-    GENERATE_PAIRS, FLIP_UP_CARD, SHUFFLE_CARDS, CHECK_UNMATCHED_PAIR, markPairAsMatched,
-    MARK_PAIR_AS_MATCHED, flipDownPair, FLIP_DOWN_PAIR, INIT_GAME,
-    shuffleCards, checkUnmatchedPair, checkMatchedPair, generatePairs, SHOW_NUM_CARDS_SELECTION, CHECK_MATCHED_PAIR
+    GENERATE_PAIRS,
+    FLIP_UP_CARD,
+    SHUFFLE_CARDS,
+    CHECK_UNMATCHED_PAIR,
+    markPairAsMatched,
+    MARK_PAIR_AS_MATCHED,
+    flipDownPair,
+    FLIP_DOWN_PAIR,
+    INIT_GAME,
+    shuffleCards,
+    checkUnmatchedPair,
+    checkMatchedPair,
+    generatePairs,
+    SHOW_NUM_CARDS_SELECTION,
+    CHECK_MATCHED_PAIR
 } from './actions';
 import shuffle from 'shuffle-array';
 import { generateCardSet, getCard, cardsHaveIdenticalImages } from './cardFunctions';
+import { Card } from './card';
+import { GameState } from './gameState';
+import { AnyAction } from 'redux';
 
-const initialState = {
+const initialState: GameState = {
     turnNo: 1,
     pairsFound: 0,
     numClicksWithinTurn: 0,
@@ -19,10 +34,10 @@ const initialState = {
 
 // The reducer for the memory card array
 // state is an array of cards
-function memoryCards(state = [], action) {
+function memoryCards(state: Card[] = [], action: AnyAction) {
     switch (action.type) {
         case FLIP_UP_CARD:
-            return state.map((card) => {
+            return state.map((card: Card) => {
                 if (action.id === card.id) {
                     return Object.assign({}, card, {
                         imageUp: true
@@ -32,21 +47,21 @@ function memoryCards(state = [], action) {
             });
 
         case MARK_PAIR_AS_MATCHED:
-            return state.map((card) => {
+            return state.map((card: Card) => {
                 if (action.id1 === card.id || action.id2 === card.id) {
                     return Object.assign({}, card, {
                         matched: true
-                    })
+                    });
                 }
                 return card;
             });
 
         case FLIP_DOWN_PAIR:
-            return state.map((card) => {
+            return state.map((card: Card) => {
                 if (action.id1 === card.id || action.id2 === card.id) {
                     return Object.assign({}, card, {
                         imageUp: false
-                    })
+                    });
                 }
                 return card;
             });
@@ -67,7 +82,7 @@ function memoryCards(state = [], action) {
 
 // The reducer for the game
 // state is an object with game state and an array of cards
-function memoryGame(state = initialState, action) {
+function memoryGame(state: GameState = initialState, action: AnyAction) {
     switch (action.type) {
         case SHOW_NUM_CARDS_SELECTION:
             return Object.assign({}, initialState, { showNumCardsSelection: true });
@@ -115,6 +130,9 @@ function memoryGame(state = initialState, action) {
 
         case FLIP_UP_CARD: {
             const card = getCard(action.id, state.cards);
+            if (card == null) {
+                return state;
+            }
             if (card.imageUp || card.matched) {
                 // Selected an already flipped card
                 // or a card that has already been matched
