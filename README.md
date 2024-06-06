@@ -7,7 +7,7 @@
     git clone https://github.com/LarsBergqvist/react-redux-memory-game
     cd react-redux-memory-game
     yarn install
-    yarn start
+    yarn run dev
 ```
 <p>Try it out live here: https://larsbergqvist.github.io/react-redux-memory-game/
 

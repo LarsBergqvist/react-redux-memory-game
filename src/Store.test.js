@@ -2,6 +2,7 @@ import { createStore } from 'redux'
 import memoryGame from './reducers'
 import { checkMatchedPair, flipUpCard, generatePairs, initGame, showNumCardsSelection } from './actions';
 import { MAX_PAIRS, getCard } from './cardFunctions';
+import { expect, test } from 'vitest'
 
 //
 // These tests uses the initial, un-shuffled state
