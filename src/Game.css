@@ -48,13 +48,17 @@ img {
   width: 110px;
 }
 
-.num-cards-button-container > button {
-  font-size: 3.5em;
-  margin-left: 0.2em;
-  margin-right: 0.2em;
-  margin-top: 0.5em;
-  border-radius: 5px;
-  background-color:bisque;
+.num-cards-button-container {
+  button {
+    font-size: 3.5em;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    margin-top: 0.5em;
+    border-radius: 5px;
+    background-color:bisque;
+    color: black;
+    padding: 10px;
+  }
 }
 
 .matched {
