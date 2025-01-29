@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { flipUpCard, checkUnmatchedPair, checkMatchedPair, initGame, showNumCardsSelection } from './actions';
 import NumCardsSelectionView from './NumCardsSelectionView';
 import GameStatusView from './GameStatusView';
+import GtagHelper from './GtagHelper';
 
 let timeOut = null;
 
@@ -71,6 +72,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onCardClicked: id => {
+            GtagHelper.sendEvent('card_clicked', {
+                event_category: 'game',
+                event_label: 'User clicked card',
+            });
             clearInterval(timeOut);
             dispatch(flipUpCard(id));
             dispatch(checkMatchedPair());
@@ -79,6 +84,10 @@ const mapDispatchToProps = dispatch => {
             }, 4000);
         },
         onShowNumCardsSelection: () => {
+            GtagHelper.sendEvent('game_restarted', {
+                event_category: 'game',
+                event_label: 'User has initiated game restart',
+            });
             dispatch(showNumCardsSelection());
         },
         onInitGame: numPairs => {
