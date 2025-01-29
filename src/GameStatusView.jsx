@@ -1,7 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import GtagHelper from './GtagHelper';
 
 const GameStatusView = props => {
+    const handleRestartClick = () => {
+        GtagHelper.sendEvent('restart_game', {
+            event_category: 'game',
+            event_label: 'User clicked restart',
+        });
+        props.onShowNumCardsSelection();
+    };
+
     if (props.gameComplete) {
         return <>
             <div>GAME COMPLETE!</div>
@@ -13,7 +22,7 @@ const GameStatusView = props => {
             <div>
                 Turn: {props.turnNo}   Pairs found: {props.pairsFound}
             </div>
-            <button className='game-button' onClick={props.onShowNumCardsSelection}>Restart game</button>
+            <div><button className='game-button' onClick={handleRestartClick}>Play again?</button></div>
         </>;
     }
 }
